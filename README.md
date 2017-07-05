@@ -13,7 +13,7 @@ This data visualization project will use JavaScript, HTML, CSS, but it will prim
 
 Wireframes
 
-The wireframe is attached in the repo. The top wireframe has 2 dropdowns, none of which have been selected. The second wireframe has one of the dropdown menus selected. A third dropdown menu appears and has all the available statistics for display. They appear on the right side of the page.
+The wireframe is attached in the repo. The top wireframe has 2 dropdowns, none of which have been selected. The second wireframe has one of the dropdown menus selected. A third dropdown menu appears and has all the available statistics for display. They appear on the right side of the page. As this will be a data visualization project, the HTML display features will be minimal.
 
 Implementation Timeline
 
