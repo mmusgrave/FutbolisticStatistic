@@ -17,10 +17,6 @@ The wireframe is attached in the repo. The top wireframe has 2 dropdowns, none o
 
 Implementation Timeline
 
-This will be the road map for your application. You have about three days for this project. Refer to your MVP and group the features into three phases. Break down each phase into several sub-tasks to keep yourself organized.
-
-You should have a working app at the end of each phase (even if not all of your features are in yet).
-
 Day 1:
 I should set up all the necessary features for a working web app. This includes the node modules, webpack, index.html page, and installing D3.js. This first day will involve learning all about D3 and connecting the API endpoints.
 
