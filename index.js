@@ -1,10 +1,3 @@
-// var square = d3.selectAll("rect");
-// var circle = d3.selectAll("circle");
-// square.style("fill", "orange");
-// circle.style("fill", "steelblue");
-//
-// circle.attr("cx", function() { return Math.random() * 720; });
-
 const seasons = [
   '2015/16',
   '2016/17'
@@ -12,166 +5,37 @@ const seasons = [
 
 const leagues = [
   '1. Bundesliga',
-  // 'Ligue 1',
-  'Premier League'//,
-  // 'La Liga (Primera Division)',
-  // 'Serie A'
+  'Premier League'
 ]
 
 const seasonsAll = {
   '2015/16': {
       '1. Bundesliga': 394,
-      // 'Ligue 1': 396,
-      'Premier League': 398//,
-      // 'La Liga (Primera Division)': 399,
-      // 'Serie A': 401//,
+      'Premier League': 398
     },
   '2016/17': {
       '1. Bundesliga': 430,
-      // 'Ligue 1': 434,
-      'Premier League': 426//,
-      // 'La Liga (Primera Division)': 436,
-      // 'Serie A': 438
+      'Premier League': 426
     }
 }
 
 const season2015_16 = {
   '1. Bundesliga': 394,
-  // 'Ligue 1': 396,
-  'Premier League': 398//,
-  // 'La Liga (Primera Division)': 399,
-  // 'Serie A': 401//,
-  // 'Champions League': 405
+  'Premier League': 398
 }
 
 const season2016_17 = {
   '1. Bundesliga': 430,
-  // 'Ligue 1': 434,
-  'Premier League': 426//,
-  // 'La Liga (Primera Division)': 436,
-  // 'Serie A': 438
+  'Premier League': 426
 }
 
 const leagueTotals = {
   '1. Bundesliga': 0,
-  // 'Ligue 1': 0,
-  'Premier League': 0//,
-  // 'La Liga (Primera Division)': 0,
-  // 'Serie A': 0
+  'Premier League': 0
 }
-
-
-// var width = 420,
-//     barHeight = 20;
-//
-// var x = d3.scaleLinear()
-//     .range([0, width]);
-//
-// var chart = d3.select(".chart")
-//     .attr("width", width);
-//
-// var margin = {top: 20, right: 20, bottom: 100, left: 40},
-// width = 400 - margin.left - margin.right,
-// height = 300 - margin.top - margin.bottom;
-//
-//
-// // set the ranges
-// // var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
-// var x = d3.scaleBand()
-//           .rangeRound([0, width], .05);
-//
-//
-// var y = d3.scaleLinear().range([height, 0]);
-//
-// // define the axis
-// var xAxis = d3.axisBottom()
-//     .scale(x);
-//     // .orient("bottom");
-//
-//
-// var yAxis = d3.axisLeft()
-//     .scale(y);
-//     // .orient("left")
-//
-//
-// // add the SVG element
-// var svg = d3.select("body").append("svg")
-//     .attr("width", width + margin.left + margin.right)
-//     .attr("height", height + margin.top + margin.bottom)
-//     .attr("id", "chart")
-//   .append("g")
-//     .attr("transform",
-//           "translate(" + margin.left + "," + margin.top + ")");
-//
-// x.domain(leagues.map(function(d) { return d; }));
-// // y.domain([0, d3.max(data, function(d) { return d.Freq; })]);
-//
-// // add axis
-// svg.append("g")
-// .attr("class", "x axis")
-// .attr("transform", "translate(0," + height + ")")
-// .call(xAxis)
-// .selectAll("text")
-// .style("text-anchor", "end")
-// .attr("dx", "-.8em")
-// .attr("dy", "-.55em")
-// .attr("transform", "rotate(-90)" );
-//
-// // svg.append("g")
-// // .attr("class", "y axis")
-// // .call(yAxis)
-// // .append("text")
-// //   .text(function(d){
-// //   return "Goals";
-// // })
-// // .attr("transform", "rotate(-90)")
-// // .attr("y", 5)
-// // .attr("dy", ".71em")
-// // // .style("text-anchor", "end");
-//
-// svg.append("g")
-//   .attr('id', "display")
 
 function addToLeagueTotals(leagueName, seasonTotal){
   leagueTotals[leagueName] = seasonTotal;
-  // d3.select(".chart")
-  // .selectAll("div")
-  //   .data(leagueTotals[leagueName])
-  // .enter().append("div")
-  //   .style("width", function(d) {
-  //
-  //     return d + "px";
-  //   })
-  //   .text(function(d) {
-  //
-  //     return d;
-  // //   });
-  // x.domain([0, d3.max(leagueTotals, function(d) { return d.value; })]);
-  //
-  // chart.attr("height", barHeight * leagueTotals.length);
-  //
-  // var bar = chart.selectAll("g")
-  //     .data(leagueTotals)
-  //   .enter().append("g")
-  //     .attr("transform", function(d, i) { return "translate(0," + i * barHeight + ")"; });
-  //
-  // bar.append("rect")
-  //     .attr("width", function(d) {
-  //
-  //       return x(d.value);
-  //     })
-  //     .attr("height", barHeight - 1);
-  //
-  // bar.append("text")
-  //     .attr("x", function(d) {
-  //
-  //       return x(d.value) - 3;
-  //     })
-  //     .attr("y", barHeight / 2)
-  //     .attr("dy", ".35em")
-  //     .text(function(d) { return d.value; });
-  //console.log(leagueName);
-  //console.log(leagueTotals[leagueName]);
 }
 
 
@@ -179,7 +43,6 @@ function getSeasonGoals(seasonURL){
   d3.json(seasonURL, addToLeagueTotals)
   .header('X-Auth-Token', 'ee9efc13e5a04bf08b66ea86ddce5d86')
   .get( function(data){
-    // //console.log(data);
 
     let leagueTableURL = data._links.leagueTable.href;
 
@@ -190,64 +53,23 @@ function getSeasonGoals(seasonURL){
       let totalGoals = getTotalGoals(data.standing);
       let leagueName = data.leagueCaption.slice(0, data.leagueCaption.indexOf(' 20'));
       let season = data.leagueCaption.slice(data.leagueCaption.indexOf('20'));
-      // leagueTotals[leagueName] += totalGoals;
       addToLeagueTotals(leagueName, totalGoals);
 
       return totalGoals;
-    //     d3.json('https://api.football-data.org/v1/competitions/394/fixtures')
-    //       .header('X-Auth-Token', 'ee9efc13e5a04bf08b66ea86ddce5d86')
-    //       .get( function(data2){
-    //
-    //       });
-    // });
   });
 });
 }
 
-  function getTotalGoals(leagueTable){
+function getTotalGoals(leagueTable){
     let totalGoals = 0;
     leagueTable.forEach( (team) => {
-    totalGoals += team.goals;
+      totalGoals += team.goals;
     });
     return totalGoals;
-  }
+}
 
 
-// for (var property in leagues) {
-//   let season2015_16ID = season2015_16[leagues[property]];
-//   let season2016_17ID = season2016_17[leagues[property]];
-//   let season2015_16URL = `https://api.football-data.org/v1/competitions/${season2015_16ID}/`;
-//   let season2016_17URL = `https://api.football-data.org/v1/competitions/${season2016_17ID}/`;
-//   //
-//   let leagueTotalGoals = getSeasonGoals(season2015_16URL) + getSeasonGoals(season2016_17URL);
-//   //
-//   // //console.log(leagueTotalGoals);
-// }
-// //console.log(leagueTotals);
-//
-
-// var seasonSelect = d3.select('#season');
 makeSelect('season', seasons);
-
-
-// seasonSelect.append('option')
-//             	// .attr('class','select')
-//             	.attr('value','null')
-//             	.attr('disabled', 'true')
-//             	.attr('selected', 'true')
-//             	.text('Please Select a Season')
-// seasonSelect.on('change', seasonChange)
-//
-// var seasonsOptions = d3.select('#season')
-//                 .selectAll('option')
-//               	.data(seasons, function (d, i){
-//                   return d + i;
-//                 })
-//                 .enter()
-//               	.append('option')
-//               		.text(function (d){
-//                     return d;
-//                   });
 
 function makeSelect(name, options, extra, clubs){
   let alreadyExists = d3.select(`#${name}`)
@@ -282,7 +104,6 @@ function makeSelect(name, options, extra, clubs){
 
 function makeDefault(select){
   select.append('option')
-      	// .attr('class','select')
       	.attr('value','null')
       	.attr('disabled', 'true')
       	.attr('selected', 'true')
@@ -292,7 +113,6 @@ function makeDefault(select){
 function makeOptions(select, options, clubs){
   let clubTags = select.selectAll('option')
     .data(options, function (d, i) {
-      //
       return d + i;
     })
     .enter()
@@ -304,8 +124,6 @@ function makeOptions(select, options, clubs){
         return d;
       });
       if (clubs){
-
-        //console.log(clubTags._groups)
         let i = 0;
         for (var key in clubs){
           for (var item in clubs[key]){
@@ -319,10 +137,6 @@ function makeOptions(select, options, clubs){
 
 
 function seasonChange() {
-
-	// let selectValue = d3.select('select').property('value')
-  // var url = 'https://api.football-data.org/v1/competitions/394/teams';
-
   let leagueSelect = makeSelect('league', leagues, this.value);
   var width = 420,
       barHeight = 20;
@@ -330,16 +144,10 @@ function seasonChange() {
   var x = d3.scaleLinear()
       .range([0, width]);
 
-  // var chart = d3.select(".chart")
-  //     .attr("width", width);
-
   var margin = {top: 20, right: 20, bottom: 100, left: 40},
   width = 400 - margin.left - margin.right,
   height = 300 - margin.top - margin.bottom;
 
-
-  // set the ranges
-  // var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
   var x = d3.scaleBand()
             .rangeRound([0, width], .05);
 
@@ -349,13 +157,9 @@ function seasonChange() {
   // define the axis
   var xAxis = d3.axisBottom()
       .scale(x);
-      // .orient("bottom");
-
 
   var yAxis = d3.axisLeft()
       .scale(y);
-      // .orient("left")
-
 
   // add the SVG element
   d3.select('#chart').remove();
@@ -368,7 +172,6 @@ function seasonChange() {
             "translate(" + margin.left + "," + margin.top + ")");
 
   x.domain(leagues.map(function(d) { return d; }));
-  // y.domain([0, d3.max(data, function(d) { return d.Freq; })]);
 
   // add axis
   svg.append("g")
@@ -380,18 +183,6 @@ function seasonChange() {
   .attr("dx", "-.8em")
   .attr("dy", "-.55em")
   .attr("transform", "rotate(-90)" );
-
-  // svg.append("g")
-  // .attr("class", "y axis")
-  // .call(yAxis)
-  // .append("text")
-  //   .text(function(d){
-  //   return "Goals";
-  // })
-  // .attr("transform", "rotate(-90)")
-  // .attr("y", 5)
-  // .attr("dy", ".71em")
-  // // .style("text-anchor", "end");
 
   svg.append("g")
     .attr('id', "display")
@@ -424,31 +215,7 @@ function seasonChange() {
           let totalGoals = getTotalGoals(data.standing);
           let leagueName = data.leagueCaption.slice(0, data.leagueCaption.indexOf(' 20'));
           let season = data.leagueCaption.slice(data.leagueCaption.indexOf('20'));
-          // let numOfGames = data.
-          // leagueTotals[leagueName] += totalGoals;
           addToLeagueTotals(leagueName, totalGoals);
-          // d3.select('body').selectAll('svg');
-          // var chart = d3.select("#chart")
-          // chart.append("svg")
-          // .attr("id", leagueName)
-          // .attr("width", 400)
-          // .attr("height", 300);
-
-          // d3.select(`svg`).
-          //   append('rect').
-          //     attr("x", 0).
-          //     attr("y", 0).
-          //     attr("height", 100).
-          //     attr("width", totalGoals/5).
-          //     append('br');
-
-        // let svg = d3.select('svg');
-        //
-        // let bars =      svg.selectAll("bar");
-                  //
-     // Add bar chart
-    //  let xDistance = ((svg._groups[0][0].childElementCount-2)* 10)+ 70;
-
 
      let inner_group = group.append('g').attr('id', leagueName);
      inner_group.append("rect")
@@ -480,13 +247,6 @@ function seasonChange() {
          .on("mouseout", function(d){
            d3.selectAll("#extraStats").remove();
          })
-        //  .attr("transform", "translate(0," + height + ")");
-        //  .attr("height", function(d) { return height - y(totalGoals); });
-          // svg.
-          //   append('br');
-          //
-          // return totalGoals;
-
       inner_group.append('text')
           .attr("x", function(d) { return x(leagueName); })
           .attr("transform", "translate(75,0)")
@@ -499,7 +259,6 @@ function seasonChange() {
 };
 
 function leagueChange() {
-	// let selectValue = d3.select('select').property('value')
 
   let leagueString = this[this.selectedIndex].value;
   let yearString = this.getAttribute('year');
@@ -517,8 +276,6 @@ function leagueChange() {
         .get(function(leagueTable){
           let clubs = {};
           leagueTable.standing.forEach((club) => {
-            //
-            //console.log(club);
             clubs[club.teamName] = {
               name: club.teamName,
               wins: club.wins,
@@ -540,17 +297,12 @@ function leagueChange() {
 
           var x = d3.scaleLinear()
               .range([0, width]);
-
-          // var chart = d3.select(".chart")
-          //     .attr("width", width);
-
           var margin = {top: 50, right: 20, bottom: 150, left: 40},
           width = 800 - margin.left - margin.right,
           height = 600 - margin.top - margin.bottom;
 
 
           // set the ranges
-          // var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
           var x = d3.scaleBand()
                     .rangeRound([0, width], .05);
 
@@ -560,13 +312,9 @@ function leagueChange() {
           // define the axis
           var xAxis = d3.axisBottom()
               .scale(x);
-              // .orient("bottom");
-
 
           var yAxis = d3.axisLeft()
               .scale(y);
-              // .orient("left")
-
 
           // add the SVG element
           d3.select('#chart').remove();
@@ -579,7 +327,6 @@ function leagueChange() {
                     "translate(" + margin.left + "," + margin.top + ")");
 
           x.domain(Object.keys(clubs).map(function(d) { return d; }));
-          // y.domain([0, d3.max(data, function(d) { return d.Freq; })]);
 
           // add axis
           svg.append("g")
@@ -592,26 +339,12 @@ function leagueChange() {
           .attr("dy", "-.55em")
           .attr("transform", "rotate(-90)" );
 
-          // svg.append("g")
-          // .attr("class", "y axis")
-          // .call(yAxis)
-          // .append("text")
-          //   .text(function(d){
-          //   return "Goals";
-          // })
-          // .attr("transform", "rotate(-90)")
-          // .attr("y", 5)
-          // .attr("dy", ".71em")
-          // // .style("text-anchor", "end");
-
           svg.append("g")
             .attr('id', "display");
 
           let group = svg.select('#display');
           group.selectAll('*').remove();
 
-          // let seasonString = this[this.selectedIndex].value;
-          // let leagueIDs = seasonsAll[seasonString];
           svg.select('#title').remove();
           let title = svg.append("text").attr("id", "title");
           title.text(leagueString + " points breakdown in the " + yearString + " Season")
@@ -620,7 +353,7 @@ function leagueChange() {
           svg.select('g.legend').remove();
           let legendGroup = svg.append('g').attr('class', 'legend');
           let keyGroup = svg.append('g').attr('class', 'legend_key');
-          // keyGroup.style('float', 'right');
+
           keyGroup.attr("transform", "translate(650,0)")
           keyGroup.append('rect')
             .attr('class', 'wins')
@@ -631,7 +364,7 @@ function leagueChange() {
             .text(function(d){ return 'Wins'; });
 
           keyGroup = svg.append('g').attr('class', 'legend_key');
-          // keyGroup.style('float', 'right');
+
           keyGroup.attr("transform", "translate(650,20)")
           keyGroup.append('rect')
             .attr('class', 'draws')
@@ -644,7 +377,6 @@ function leagueChange() {
 
           for (var key in clubs){
             let club = clubs[key];
-            // //console.log(club);
             let inner_group = group.append('g').attr('id', club.name);
             let bar_section = inner_group.append('g').attr('class', `wins_group`);
             let pointsFromWins = club.wins * 3;
@@ -654,9 +386,7 @@ function leagueChange() {
                 .attr("x", function(d) { return x(club.name) + 5; })
                 .attr("width", 20)
                 .attr("y", function(d) { return height - (pointsFromWins * 4); })
-               //  .attr("y", 100)//function(d) { return y(totalGoals); })
                 .attr("height", function(d) { return pointsFromWins * 4 })
-               //  .attr("transform", "translate("+ xDistance+ ",0)")
                 .attr("transform", "translate(5,0)")
                 .attr("text-anchor", "middle");
                 bar_section.append('text')
@@ -672,9 +402,7 @@ function leagueChange() {
                .attr("x", function(d) { return x(club.name) + 5; })
                .attr("width", 20)
                .attr("y", function(d) { return height - (club.draws * 4) - (pointsFromWins * 4); })
-              //  .attr("y", 100)//function(d) { return y(totalGoals); })
                .attr("height", function(d) { return club.draws * 4; })
-              //  .attr("transform", "translate("+ xDistance+ ",0)")
                .attr("transform", "translate(5,0)")
                .attr("text-anchor", "middle");
                bar_section.append('text')
@@ -688,8 +416,6 @@ function leagueChange() {
           });
 
       });
-  // d3.select('body').append('br');
-	// let teamSelect = makeSelect('team', );
 };
 
 function teamChange() {
@@ -713,7 +439,6 @@ function teamChange() {
   var w = 900,                        //width
    h = 900,                            //height
    r = 400,                            //radius
-  //  color = d3.scale.category20c();     //builtin range of colors
   center = 450,
    color = d3.scaleOrdinal(d3.schemeCategory20c);
 
@@ -774,42 +499,9 @@ function teamChange() {
      group.selectAll('*').remove();
 
      svg.attr("text-anchor", "middle");
-     // let seasonString = this[this.selectedIndex].value;
-     // let leagueIDs = seasonsAll[seasonString];
      svg.select('#title').remove();
      let title = svg.append("text").attr("id", "title");
      title.text(clubString + " Results Breakdown in the " + yearString + " Season")
        .attr("font-size", 24)
        .attr("transform", "translate(" + 450 + "," + 30 + ")") ;
-  // d3.json(league_url)
-  //   .header('X-Auth-Token', 'ee9efc13e5a04bf08b66ea86ddce5d86')
-  //   .get(function(data){
-  //
-  //     d3.json(data._links.leagueTable.href)
-  //       .header('X-Auth-Token', 'ee9efc13e5a04bf08b66ea86ddce5d86')
-  //       .get(function(leagueTable){
-  //
-  //       })
-  //   })
 }
-
-// var seasonSelect = d3.select('#season');
-// var leagueSelect = d3.select('#league');
-// while (seasonSelect.property("value") === null){
-//   if (seasonSelect.property("value") !== null ){
-//     leagueSelect
-//       .selectAll("option")
-//       .data(leagues)
-//       .enter()
-//       .append("option")
-//   }
-// }
-
-// for (var property in season2015_16){
-//   let league_url = `https://api.football-data.org/v1/competitions/${season2015_16[property]}`
-//   d3.json(league_url)
-//     .header('X-Auth-Token', 'ee9efc13e5a04bf08b66ea86ddce5d86')
-//     .get(function(data){
-//
-//   });
-// };
