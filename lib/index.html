@@ -1,4 +1,40 @@
 <!DOCTYPE html>
+
+<style media="screen">
+    svg {
+    font: 10px sans-serif;
+    background-color: green;
+    /*text-align: right;*/
+    display: flex;
+    flex: left;
+    padding: 3px;
+    margin: 1px;
+    color: white;
+    }
+
+    rect {
+      fill: white;
+      color: black;
+    }
+    .axis {
+  	  font: 10px sans-serif;
+  	}
+
+    .wins {
+      fill: white;
+    }
+    .draws{
+      fill: lightgrey;
+    }
+
+  	.axis path,
+  	.axis line {
+  	  fill: none;
+  	  /*stroke: #000;*/
+  	  shape-rendering: crispEdges;
+  	}
+</style>
+
 <html>
   <head>
     <meta charset="utf-8">
@@ -7,19 +43,33 @@
   </head>
   <body>
 
-    <h1>Hello World</h1>
-    <svg width="300px" height="150px">
-      <rect x="20" y="20" width="20px" height="20" rx="5" ry="5" />
-      <rect x="60" y="20" width="20px" height="20" rx="5" ry="5" />
-      <rect x="100" y="20" width="20px" height="20" rx="5" ry="5"/>
-     </svg>
+    <h1>Welcome to Futbolistic Statistic</h1>
 
+
+    <!-- <select id="season">
+      <option value="null" selected disabled>Please Select a Season</option>
+      <option value="2015/16 Season">2015/16 Season</option>
+      <option value="2016/17 Season">2016/17 Season</option>
+    </select> -->
+    <!-- <br> -->
+    <!-- <select id="league">
+      <option value="null" selected >No League</option>
+      <option value="1. Bundesliga">1. Bundesliga</option>
+      <option value="Ligue 1">Ligue 1</option>
+      <option value="Premier League">Premier League</option>
+      <option value="La Liga (Primera Division)">La Liga (Primera Division)</option>
+      <option value="Serie A">Serie A</option>
+    </select> -->
+
+<!--
      <svg width="720" height="120">
         <circle cx="40" cy="60" r="10"></circle>
         <circle cx="80" cy="60" r="10"></circle>
         <circle cx="120" cy="60" r="10"></circle>
-      </svg>
+      </svg> -->
 
       <script src="index.js"></script>
+      <!-- <svg id="chart" width="300px" height="300px">
+      </svg> -->
   </body>
 </html>
