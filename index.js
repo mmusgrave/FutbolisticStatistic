@@ -68,23 +68,31 @@ function getTotalGoals(leagueTable){
     return totalGoals;
 }
 
-
-makeSelect('season', seasons);
-
 function makeSelect(name, options, extra, clubs){
-  let alreadyExists = d3.select(`#${name}`)
+  let alreadyExists = d3.select(`#${name}`);
   if (alreadyExists._groups[0][0]){
 
     if (name === 'league') {
       alreadyExists._groups[0][0].setAttribute("year", extra);
+      return alreadyExists;
     } else if (name === 'team') {
+      debugger
       alreadyExists._groups[0][0].setAttribute("league", extra);
+      d3.select(`#${name}`).remove();
+      let select = d3.select('body')
+                      .append('select')
+                      	.attr('id', name);
+      select.attr("league", extra);
+      select.attr("clubs", clubs);
+      select.on('change', teamChange);
+      makeDefault(select);
+      makeOptions(select, options, clubs);
+      return select;
     }
-    return alreadyExists;
   } else {
     let select = d3.select('body')
                     .append('select')
-                    	.attr('id', name)
+                    	.attr('id', name);
     if (name === 'season'){
       select.on('change', seasonChange);
     } else if (name === 'league') {
@@ -145,7 +153,7 @@ function seasonChange() {
       .range([0, width]);
 
   var margin = {top: 20, right: 20, bottom: 100, left: 40},
-  width = 400 - margin.left - margin.right,
+  width = 500 - margin.left - margin.right,
   height = 300 - margin.top - margin.bottom;
 
   var x = d3.scaleBand()
@@ -217,26 +225,33 @@ function seasonChange() {
           let season = data.leagueCaption.slice(data.leagueCaption.indexOf('20'));
           addToLeagueTotals(leagueName, totalGoals);
 
-     let inner_group = group.append('g').attr('id', leagueName);
-     inner_group.append("rect")
+          let inner_group = group.append('g').attr('id', leagueName);
+          inner_group.append("rect")
          .attr("class", "bar")
          .attr("id", leagueName)
          .attr("x", function(d) { return x(leagueName); })
-         .attr("width", 30)
+         .attr("width", 35)
          .attr("y", function(d) { return height - (totalGoals/10); })
         //  .attr("y", 100)//function(d) { return y(totalGoals); })
          .attr("height", function(d) { return totalGoals/10; })
         //  .attr("transform", "translate("+ xDistance+ ",0)")
-         .attr("transform", "translate(70,0)")
+         .attr("transform", "translate(94,0)")
          .attr("text-anchor", "middle");
-         inner_group.on("mouseover", function (d){
 
+         inner_group.append('text')
+             .attr("x", function(d) { return x(leagueName); })
+             .attr("transform", "translate(100,0)")
+             .attr("y", function(d) { return height - (totalGoals/10)+10; })
+             .text(function(d) {return totalGoals;});
+
+
+         inner_group.on("mouseover", function (d){
            d3.select(this).raise()
             .append("text")
             .attr("id", "extraStats")
             .attr("x", function(d) { return x(leagueName); })
-            .attr("transform", "translate(75,0)")
-            .attr("y", function(d) { return height - (totalGoals/10)-10; })
+            .attr("transform", "translate(80,0)")
+            .attr("y", function(d) { return height - (totalGoals/10)-20; })
             .text(function(d){
               let statString = "Goals per Game: ";
               let goalsPerGame = Math.round((totalGoals/numOfGames)*100)/100;
@@ -247,12 +262,7 @@ function seasonChange() {
          .on("mouseout", function(d){
            d3.selectAll("#extraStats").remove();
          })
-      inner_group.append('text')
-          .attr("x", function(d) { return x(leagueName); })
-          .attr("transform", "translate(75,0)")
-          .attr("y", function(d) { return height - (totalGoals/10)+10; })
-          .text(function(d) {return totalGoals;});
-      });
+        });
     });
   };
 
@@ -357,7 +367,7 @@ function leagueChange() {
           keyGroup.attr("transform", "translate(650,0)")
           keyGroup.append('rect')
             .attr('class', 'wins')
-            .attr('width', 25)
+            .attr('width', 35)
             .attr('height', 15);
           keyGroup.append('text')
           .attr("transform", "translate(0,10)")
@@ -368,7 +378,7 @@ function leagueChange() {
           keyGroup.attr("transform", "translate(650,20)")
           keyGroup.append('rect')
             .attr('class', 'draws')
-            .attr('width', 30)
+            .attr('width', 35)
             .attr('height', 15);
           keyGroup.append('text')
           .attr("transform", "translate(0,10)")
@@ -436,13 +446,13 @@ function teamChange() {
   let league_url = `https://api.football-data.org/v1/competitions/${leagueID}`
   let totalGames = clubWins + clubDraws + clubLosses;
 
-  var w = 900,                        //width
-   h = 900,                            //height
-   r = 400,                            //radius
-  center = 450,
+  var w = 700,                        //width
+   h = 700,                            //height
+   r = 300,                            //radius
+  center = 350,
    color = d3.scaleOrdinal(d3.schemeCategory20c);
 
-   data = [{"label":`Wins ${((clubWins/totalGames)*100).toFixed(2)}%`, "value": (clubWins/totalGames)*100},
+   data = [{"label":`Wins: ${((clubWins/totalGames)*100).toFixed(2)}%`, "value": (clubWins/totalGames)*100},
            {"label":`Draws: ${((clubDraws/totalGames)*100).toFixed(2)}%`, "value": (clubDraws/totalGames)*100},
            {"label":`Losses: ${((clubLosses/totalGames)*100).toFixed(2)}%`, "value": (clubLosses/totalGames)*100}];
 
@@ -460,7 +470,8 @@ function teamChange() {
            .attr("transform", "translate(" + center + "," + center + ")")    //move the center of the pie chart from
 
      var arc = d3.arc()
-          .innerRadius(0)//this will create <path> elements for us using arc data
+          .innerRadius(75)//this will create <path> elements for us using arc data
+          // .innerRadius(0)//this will create <path> elements for us using arc data
           .outerRadius(r);
 
 
@@ -501,7 +512,10 @@ function teamChange() {
      svg.attr("text-anchor", "middle");
      svg.select('#title').remove();
      let title = svg.append("text").attr("id", "title");
-     title.text(clubString + " Results Breakdown in the " + yearString + " Season")
-       .attr("font-size", 24)
-       .attr("transform", "translate(" + 450 + "," + 30 + ")") ;
+     title.text(clubString + " Results in the " + yearString + " Season")
+       .attr("font-size", 20)
+       .attr("transform", "translate(" + 350 + "," + 30 + ")") ;
 }
+
+
+makeSelect('season', seasons);

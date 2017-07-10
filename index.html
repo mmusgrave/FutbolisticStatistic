@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 
 <style media="screen">
+    body {
+      font-family: fantasy;
+      background-color: black;
+    }
     svg {
-    font: 10px sans-serif;
+    font: 12px sans-serif;
     background-color: green;
     /*text-align: right;*/
     display: flex;
@@ -12,19 +16,24 @@
     color: white;
     }
 
+    .title {
+      font: 24px fantasy;
+      color: white;
+    }
+
     rect {
       fill: white;
       color: black;
     }
     .axis {
-  	  font: 10px sans-serif;
+  	  font: 12px sans-serif;
   	}
 
     .wins {
       fill: white;
     }
     .draws{
-      fill: lightgrey;
+      fill: darkgrey;
     }
 
   	.axis path,
@@ -38,12 +47,12 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Futbolistic Statistic</title>
     <script src="https://d3js.org/d3.v4.min.js"></script>
   </head>
   <body>
 
-    <h1>Welcome to Futbolistic Statistic</h1>
+    <h1 class="title" >Welcome to Futbolistic Statistic</h1>
 
 
     <!-- <select id="season">
