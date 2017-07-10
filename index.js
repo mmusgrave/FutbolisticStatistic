@@ -170,8 +170,8 @@ function addToLeagueTotals(leagueName, seasonTotal){
   //     .attr("y", barHeight / 2)
   //     .attr("dy", ".35em")
   //     .text(function(d) { return d.value; });
-  console.log(leagueName);
-  console.log(leagueTotals[leagueName]);
+  //console.log(leagueName);
+  //console.log(leagueTotals[leagueName]);
 }
 
 
@@ -179,7 +179,8 @@ function getSeasonGoals(seasonURL){
   d3.json(seasonURL, addToLeagueTotals)
   .header('X-Auth-Token', 'ee9efc13e5a04bf08b66ea86ddce5d86')
   .get( function(data){
-    // console.log(data);
+    // //console.log(data);
+    debugger
     d3.json(data._links.leagueTable.href, addToLeagueTotals)
     .header('X-Auth-Token', 'ee9efc13e5a04bf08b66ea86ddce5d86')
     .get( function(data){
@@ -217,9 +218,9 @@ function getSeasonGoals(seasonURL){
 //   //
 //   let leagueTotalGoals = getSeasonGoals(season2015_16URL) + getSeasonGoals(season2016_17URL);
 //   //
-//   // console.log(leagueTotalGoals);
+//   // //console.log(leagueTotalGoals);
 // }
-// console.log(leagueTotals);
+// //console.log(leagueTotals);
 //
 
 // var seasonSelect = d3.select('#season');
@@ -301,7 +302,7 @@ function makeOptions(select, options, clubs){
       });
       if (clubs){
 
-        console.log(clubTags._groups)
+        //console.log(clubTags._groups)
         let i = 0;
         for (var key in clubs){
           for (var item in clubs[key]){
@@ -409,7 +410,10 @@ function seasonChange() {
         let numOfGames = data.numberOfGames;
         let numOfMatchDays = data.numberOfMatchDays;
         let numOfTeams = data.numberOfTeams;
-        d3.json(data._links.leagueTable.href, addToLeagueTotals)
+        let leagueTableURL = data._links.leagueTable.href;
+
+        leagueTableURL = 'https' + leagueTableURL.substring(leagueTableURL.indexOf(':'));
+        d3.json(leagueTableURL, addToLeagueTotals)
         .header('X-Auth-Token', 'ee9efc13e5a04bf08b66ea86ddce5d86')
         .get( function(data){
           //
@@ -508,7 +512,7 @@ function leagueChange() {
           let clubs = {};
           leagueTable.standing.forEach((club) => {
             //
-            console.log(club);
+            //console.log(club);
             clubs[club.teamName] = {
               name: club.teamName,
               wins: club.wins,
@@ -634,7 +638,7 @@ function leagueChange() {
 
           for (var key in clubs){
             let club = clubs[key];
-            // console.log(club);
+            // //console.log(club);
             let inner_group = group.append('g').attr('id', club.name);
             let bar_section = inner_group.append('g').attr('class', `wins_group`);
             let pointsFromWins = club.wins * 3;
