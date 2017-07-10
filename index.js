@@ -180,8 +180,11 @@ function getSeasonGoals(seasonURL){
   .header('X-Auth-Token', 'ee9efc13e5a04bf08b66ea86ddce5d86')
   .get( function(data){
     // //console.log(data);
-    debugger
-    d3.json(data._links.leagueTable.href, addToLeagueTotals)
+    
+    let leagueTableURL = data._links.leagueTable.href;
+
+    leagueTableURL = 'https' + leagueTableURL.substring(leagueTableURL.indexOf(':'));
+    d3.json(leagueTableURL, addToLeagueTotals)
     .header('X-Auth-Token', 'ee9efc13e5a04bf08b66ea86ddce5d86')
     .get( function(data){
       let totalGoals = getTotalGoals(data.standing);
@@ -506,7 +509,10 @@ function leagueChange() {
   d3.json(league_url)
     .header('X-Auth-Token', 'ee9efc13e5a04bf08b66ea86ddce5d86')
     .get(function(data){
-      d3.json(data._links.leagueTable.href)
+      let leagueTableURL = data._links.leagueTable.href;
+
+      leagueTableURL = 'https' + leagueTableURL.substring(leagueTableURL.indexOf(':'));
+      d3.json(leagueTableURL)
         .header('X-Auth-Token', 'ee9efc13e5a04bf08b66ea86ddce5d86')
         .get(function(leagueTable){
           let clubs = {};
