@@ -139,11 +139,11 @@ function addToLeagueTotals(leagueName, seasonTotal){
   //   .data(leagueTotals[leagueName])
   // .enter().append("div")
   //   .style("width", function(d) {
-  //     debugger
+  //
   //     return d + "px";
   //   })
   //   .text(function(d) {
-  //     debugger
+  //
   //     return d;
   // //   });
   // x.domain([0, d3.max(leagueTotals, function(d) { return d.value; })]);
@@ -157,14 +157,14 @@ function addToLeagueTotals(leagueName, seasonTotal){
   //
   // bar.append("rect")
   //     .attr("width", function(d) {
-  //       debugger
+  //
   //       return x(d.value);
   //     })
   //     .attr("height", barHeight - 1);
   //
   // bar.append("text")
   //     .attr("x", function(d) {
-  //       debugger
+  //
   //       return x(d.value) - 3;
   //     })
   //     .attr("y", barHeight / 2)
@@ -188,12 +188,12 @@ function getSeasonGoals(seasonURL){
       let season = data.leagueCaption.slice(data.leagueCaption.indexOf('20'));
       // leagueTotals[leagueName] += totalGoals;
       addToLeagueTotals(leagueName, totalGoals);
-      debugger
+
       return totalGoals;
-    //     d3.json('http://api.football-data.org/v1/competitions/394/fixtures')
+    //     d3.json('https://api.football-data.org/v1/competitions/394/fixtures')
     //       .header('X-Auth-Token', 'ee9efc13e5a04bf08b66ea86ddce5d86')
     //       .get( function(data2){
-    //         debugger
+    //
     //       });
     // });
   });
@@ -212,15 +212,15 @@ function getSeasonGoals(seasonURL){
 // for (var property in leagues) {
 //   let season2015_16ID = season2015_16[leagues[property]];
 //   let season2016_17ID = season2016_17[leagues[property]];
-//   let season2015_16URL = `http://api.football-data.org/v1/competitions/${season2015_16ID}/`;
-//   let season2016_17URL = `http://api.football-data.org/v1/competitions/${season2016_17ID}/`;
-//   // debugger
+//   let season2015_16URL = `https://api.football-data.org/v1/competitions/${season2015_16ID}/`;
+//   let season2016_17URL = `https://api.football-data.org/v1/competitions/${season2016_17ID}/`;
+//   //
 //   let leagueTotalGoals = getSeasonGoals(season2015_16URL) + getSeasonGoals(season2016_17URL);
-//   // debugger
+//   //
 //   // console.log(leagueTotalGoals);
 // }
 // console.log(leagueTotals);
-// debugger
+//
 
 // var seasonSelect = d3.select('#season');
 makeSelect('season', seasons);
@@ -248,7 +248,7 @@ makeSelect('season', seasons);
 function makeSelect(name, options, extra, clubs){
   let alreadyExists = d3.select(`#${name}`)
   if (alreadyExists._groups[0][0]){
-    debugger
+
     if (name === 'league') {
       alreadyExists._groups[0][0].setAttribute("year", extra);
     } else if (name === 'team') {
@@ -262,7 +262,7 @@ function makeSelect(name, options, extra, clubs){
     if (name === 'season'){
       select.on('change', seasonChange);
     } else if (name === 'league') {
-      debugger;
+      ;
       select.attr("year", extra);
       select.on('change', leagueChange);
     } else if (name === 'team') {
@@ -288,7 +288,7 @@ function makeDefault(select){
 function makeOptions(select, options, clubs){
   let clubTags = select.selectAll('option')
     .data(options, function (d, i) {
-      // debugger
+      //
       return d + i;
     })
     .enter()
@@ -300,13 +300,13 @@ function makeOptions(select, options, clubs){
         return d;
       });
       if (clubs){
-        debugger
+
         console.log(clubTags._groups)
         let i = 0;
         for (var key in clubs){
           for (var item in clubs[key]){
             clubTags._groups[0][i].setAttribute(item, clubs[key][item]);
-            // debugger
+            //
           }
           i+= 1;
         }
@@ -317,8 +317,8 @@ function makeOptions(select, options, clubs){
 function seasonChange() {
 
 	// let selectValue = d3.select('select').property('value')
-  // var url = 'http://api.football-data.org/v1/competitions/394/teams';
-  debugger
+  // var url = 'https://api.football-data.org/v1/competitions/394/teams';
+
   let leagueSelect = makeSelect('league', leagues, this.value);
   var width = 420,
       barHeight = 20;
@@ -401,18 +401,18 @@ function seasonChange() {
   title.text("Goals in the " + seasonString + " Season")
     .attr("font-size", 24);
   for (var key in leagueIDs){
-    let league_url = `http://api.football-data.org/v1/competitions/${leagueIDs[key]}`
+    let league_url = `https://api.football-data.org/v1/competitions/${leagueIDs[key]}`
     d3.json(league_url)
       .header('X-Auth-Token', 'ee9efc13e5a04bf08b66ea86ddce5d86')
       .get(function(data){
-        debugger
+
         let numOfGames = data.numberOfGames;
         let numOfMatchDays = data.numberOfMatchDays;
         let numOfTeams = data.numberOfTeams;
         d3.json(data._links.leagueTable.href, addToLeagueTotals)
         .header('X-Auth-Token', 'ee9efc13e5a04bf08b66ea86ddce5d86')
         .get( function(data){
-          // debugger
+          //
 
           let totalGoals = getTotalGoals(data.standing);
           let leagueName = data.leagueCaption.slice(0, data.leagueCaption.indexOf(' 20'));
@@ -438,10 +438,10 @@ function seasonChange() {
         // let svg = d3.select('svg');
         //
         // let bars =      svg.selectAll("bar");
-                  // debugger
+                  //
      // Add bar chart
     //  let xDistance = ((svg._groups[0][0].childElementCount-2)* 10)+ 70;
-     debugger
+
 
      let inner_group = group.append('g').attr('id', leagueName);
      inner_group.append("rect")
@@ -456,7 +456,7 @@ function seasonChange() {
          .attr("transform", "translate(70,0)")
          .attr("text-anchor", "middle");
          inner_group.on("mouseover", function (d){
-           debugger
+
            d3.select(this).raise()
             .append("text")
             .attr("id", "extraStats")
@@ -477,7 +477,7 @@ function seasonChange() {
         //  .attr("height", function(d) { return height - y(totalGoals); });
           // svg.
           //   append('br');
-          // debugger
+          //
           // return totalGoals;
 
       inner_group.append('text')
@@ -498,7 +498,7 @@ function leagueChange() {
   let yearString = this.getAttribute('year');
   let leagueID = seasonsAll[yearString][leagueString];
 
-  let league_url = `http://api.football-data.org/v1/competitions/${leagueID}`
+  let league_url = `https://api.football-data.org/v1/competitions/${leagueID}`
   d3.json(league_url)
     .header('X-Auth-Token', 'ee9efc13e5a04bf08b66ea86ddce5d86')
     .get(function(data){
@@ -507,7 +507,7 @@ function leagueChange() {
         .get(function(leagueTable){
           let clubs = {};
           leagueTable.standing.forEach((club) => {
-            // debugger
+            //
             console.log(club);
             clubs[club.teamName] = {
               name: club.teamName,
@@ -524,7 +524,7 @@ function leagueChange() {
             };
           });
           let teamSelect = makeSelect('team', Object.keys(clubs), leagueTable.leagueCaption, clubs);
-          debugger
+
           var width = 420,
               barHeight = 20;
 
@@ -599,7 +599,7 @@ function leagueChange() {
 
           let group = svg.select('#display');
           group.selectAll('*').remove();
-          debugger
+
           // let seasonString = this[this.selectedIndex].value;
           // let leagueIDs = seasonsAll[seasonString];
           svg.select('#title').remove();
@@ -694,10 +694,10 @@ function teamChange() {
   let leagueString = this.getAttribute('league');
   let split = leagueString.indexOf(' 20');
   let yearString = leagueString.slice(split+1);
-  // debugger
+  //
   let leagueID = seasonsAll[yearString][leagueString.slice(0, split)];
-  // debugger
-  let league_url = `http://api.football-data.org/v1/competitions/${leagueID}`
+  //
+  let league_url = `https://api.football-data.org/v1/competitions/${leagueID}`
   let totalGames = clubWins + clubDraws + clubLosses;
 
   var w = 900,                        //width
@@ -762,7 +762,7 @@ function teamChange() {
 
      let group = svg.select('#display');
      group.selectAll('*').remove();
-     debugger
+
      svg.attr("text-anchor", "middle");
      // let seasonString = this[this.selectedIndex].value;
      // let leagueIDs = seasonsAll[seasonString];
@@ -774,11 +774,11 @@ function teamChange() {
   // d3.json(league_url)
   //   .header('X-Auth-Token', 'ee9efc13e5a04bf08b66ea86ddce5d86')
   //   .get(function(data){
-  //     debugger
+  //
   //     d3.json(data._links.leagueTable.href)
   //       .header('X-Auth-Token', 'ee9efc13e5a04bf08b66ea86ddce5d86')
   //       .get(function(leagueTable){
-  //         debugger
+  //
   //       })
   //   })
 }
@@ -796,10 +796,10 @@ function teamChange() {
 // }
 
 // for (var property in season2015_16){
-//   let league_url = `http://api.football-data.org/v1/competitions/${season2015_16[property]}`
+//   let league_url = `https://api.football-data.org/v1/competitions/${season2015_16[property]}`
 //   d3.json(league_url)
 //     .header('X-Auth-Token', 'ee9efc13e5a04bf08b66ea86ddce5d86')
 //     .get(function(data){
-//     debugger
+//
 //   });
 // };
