@@ -1,9 +1,9 @@
-var square = d3.selectAll("rect");
-var circle = d3.selectAll("circle");
-square.style("fill", "orange");
-circle.style("fill", "steelblue");
-
-circle.attr("cx", function() { return Math.random() * 720; });
+// var square = d3.selectAll("rect");
+// var circle = d3.selectAll("circle");
+// square.style("fill", "orange");
+// circle.style("fill", "steelblue");
+//
+// circle.attr("cx", function() { return Math.random() * 720; });
 
 const seasons = [
   '2015/16',
@@ -180,7 +180,7 @@ function getSeasonGoals(seasonURL){
   .header('X-Auth-Token', 'ee9efc13e5a04bf08b66ea86ddce5d86')
   .get( function(data){
     // //console.log(data);
-    
+
     let leagueTableURL = data._links.leagueTable.href;
 
     leagueTableURL = 'https' + leagueTableURL.substring(leagueTableURL.indexOf(':'));
