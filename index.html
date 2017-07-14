@@ -7,7 +7,7 @@
     }
     svg {
     font: 12px sans-serif;
-    background-color: green;
+    background-color: white;
     /*text-align: right;*/
     display: flex;
     flex: left;
@@ -19,21 +19,32 @@
     .title {
       font: 24px fantasy;
       color: white;
+      border: solid black 1px;
     }
 
     rect {
-      fill: white;
+      fill: lightblue;
       color: black;
+      border: 5px solid red;
+
     }
     .axis {
   	  font: 12px sans-serif;
   	}
 
     .wins {
-      fill: white;
+      fill: lightblue;
+      border: 5px solid red;
+        /*border: solid black 1px;*/
     }
     .draws{
       fill: darkgrey;
+      border: 5px solid red;
+        /*border: solid black 1px;*/
+    }
+
+    .losses {
+      fill: lightcoral;
     }
 
   	.axis path,
@@ -42,41 +53,41 @@
   	  /*stroke: #000;*/
   	  shape-rendering: crispEdges;
   	}
+
 </style>
 
 <html>
   <head>
     <meta charset="utf-8">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="icon" sizes="16x16 32x32 64x64" href="./faviconit/favicon.ico">
+    <link rel="icon" type="image/png" sizes="196x196" href="./faviconit/favicon-192.png">
+    <link rel="icon" type="image/png" sizes="160x160" href="./faviconit/favicon-160.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="./faviconit/favicon-96.png">
+    <link rel="icon" type="image/png" sizes="64x64" href="./faviconit/favicon-64.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./faviconit/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./faviconit/favicon-16.png">
+    <link rel="apple-touch-icon" href="./faviconit/favicon-57.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="./faviconit/favicon-114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="./faviconit/favicon-72.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="./faviconit/favicon-144.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="./faviconit/favicon-60.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="./faviconit/favicon-120.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="./faviconit/favicon-76.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="./faviconit/favicon-152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./faviconit/favicon-180.png">
+    <meta name="msapplication-TileColor" content="#FFFFFF">
+    <meta name="msapplication-TileImage" content="./faviconit/favicon-144.png">
+    <meta name="msapplication-config" content="./faviconit/browserconfig.xml">
     <title>Futbolistic Statistic</title>
     <script src="https://d3js.org/d3.v4.min.js"></script>
   </head>
   <body>
-
     <h1 class="title" >Welcome to Futbolistic Statistic</h1>
 
-
-    <!-- <select id="season">
-      <option value="null" selected disabled>Please Select a Season</option>
-      <option value="2015/16 Season">2015/16 Season</option>
-      <option value="2016/17 Season">2016/17 Season</option>
-    </select> -->
-    <!-- <br> -->
-    <!-- <select id="league">
-      <option value="null" selected >No League</option>
-      <option value="1. Bundesliga">1. Bundesliga</option>
-      <option value="Ligue 1">Ligue 1</option>
-      <option value="Premier League">Premier League</option>
-      <option value="La Liga (Primera Division)">La Liga (Primera Division)</option>
-      <option value="Serie A">Serie A</option>
-    </select> -->
-
-<!--
-     <svg width="720" height="120">
-        <circle cx="40" cy="60" r="10"></circle>
-        <circle cx="80" cy="60" r="10"></circle>
-        <circle cx="120" cy="60" r="10"></circle>
-      </svg> -->
-
+      <script src="season.js"></script>
+      <script src="league.js"></script>
+      <script src="team.js"></script>
       <script src="index.js"></script>
       <!-- <svg id="chart" width="300px" height="300px">
       </svg> -->
