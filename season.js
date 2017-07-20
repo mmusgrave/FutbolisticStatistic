@@ -1,5 +1,6 @@
 
 function seasonChange() {
+  d3.select('#instruct').remove();
   let leagueSelect = makeSelect('league', leagues, this.value);
   var width = 420,
       barHeight = 20;
@@ -26,6 +27,7 @@ function seasonChange() {
 
   // add the SVG element
   d3.select('#chart').remove();
+  d3.select('#chart2').remove();
   var svg = d3.select("body").append("svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)

@@ -28,6 +28,7 @@ function teamChange() {
 
 
   d3.select('#chart').remove();
+  d3.select('#chart2').remove();
    var vis = d3.select("body")
      .append("svg")
      .attr('id', 'chart')
